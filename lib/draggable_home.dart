@@ -232,39 +232,39 @@ class _DraggableHomeState extends State<DraggableHome> {
                   fullyExpanded ? fullyExpandedHeight : expandedHeight,
               flexibleSpace: Stack(
                 children: [
-                  FlexibleSpaceBar(
-                    background: Container(
-                      margin: const EdgeInsets.only(bottom: 0.2),
-                      child: fullyExpanded
-                          ? (widget.expandedBody ?? const SizedBox())
-                          : widget.headerWidget,
-                    ),
-                  ),
-                  // Positioned(
-                  //   bottom: -1,
-                  //   left: 0,
-                  //   right: 0,
-                  //   child: roundedCorner(context),
-                  // ),
-                  // Positioned(
-                  //   bottom: 0 + widget.curvedBodyRadius,
-                  //   child: AnimatedContainer(
-                  //     padding: const EdgeInsets.only(left: 10, right: 10),
-                  //     curve: Curves.easeInOutCirc,
-                  //     duration: const Duration(milliseconds: 100),
-                  //     height: fullyCollapsed
-                  //         ? 0
-                  //         : fullyExpanded
-                  //             ? 0
-                  //             : kToolbarHeight,
-                  //     width: MediaQuery.of(context).size.width,
-                  //     child: fullyCollapsed
-                  //         ? const SizedBox()
-                  //         : fullyExpanded
-                  //             ? const SizedBox()
-                  //             : widget.headerBottomBar ?? Container(),
+                  // FlexibleSpaceBar(
+                  //   background: Container(
+                  //     margin: const EdgeInsets.only(bottom: 0.2),
+                  //     child: fullyExpanded
+                  //         ? (widget.expandedBody ?? const SizedBox())
+                  //         : widget.headerWidget,
                   //   ),
-                  // )
+                  // ),
+                  Positioned(
+                    bottom: -1,
+                    left: 0,
+                    right: 0,
+                    child: roundedCorner(context),
+                  ),
+                  Positioned(
+                    bottom: 0 + widget.curvedBodyRadius,
+                    child: AnimatedContainer(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      curve: Curves.easeInOutCirc,
+                      duration: const Duration(milliseconds: 100),
+                      height: fullyCollapsed
+                          ? 0
+                          : fullyExpanded
+                              ? 0
+                              : kToolbarHeight,
+                      width: MediaQuery.of(context).size.width,
+                      child: fullyCollapsed
+                          ? const SizedBox()
+                          : fullyExpanded
+                              ? const SizedBox()
+                              : widget.headerBottomBar ?? Container(),
+                    ),
+                  )
                 ],
               ),
               stretchTriggerOffset: widget.stretchTriggerOffset,
