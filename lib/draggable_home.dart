@@ -150,8 +150,8 @@ class _DraggableHomeState extends State<DraggableHome> {
         MediaQuery.of(context).size.height * (widget.stretchMaxHeight);
 
     return Scaffold(
-      backgroundColor:
-          widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+      // backgroundColor:
+      //     widget.backgroundColor,
       drawer: widget.drawer,
       body: NotificationListener<ScrollNotification>(
         onNotification: (notification) {
@@ -193,89 +193,89 @@ class _DraggableHomeState extends State<DraggableHome> {
       physics: widget.physics ?? const BouncingScrollPhysics(),
       controller: widget.scrollController,
       slivers: [
-        StreamBuilder<List<bool>>(
-          stream: CombineLatestStream.list<bool>([
-            isFullyCollapsed.stream,
-            isFullyExpanded.stream,
-          ]),
-          builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
-            final List<bool> streams = (snapshot.data ?? [false, false]);
-            final bool fullyCollapsed = streams[0];
-            final bool fullyExpanded = streams[1];
-
-            return SliverAppBar(
-              backgroundColor:
-                  !fullyCollapsed ? widget.backgroundColor : widget.appBarColor,
-              leading: widget.alwaysShowLeadingAndAction
-                  ? widget.leading
-                  : !fullyCollapsed
-                      ? const SizedBox()
-                      : widget.leading,
-              actions: widget.alwaysShowLeadingAndAction
-                  ? widget.actions
-                  : !fullyCollapsed
-                      ? []
-                      : widget.actions,
-              elevation: 0,
-              pinned: true,
-              stretch: true,
-              centerTitle: widget.centerTitle,
-              title: widget.alwaysShowTitle
-                  ? widget.title
-                  : AnimatedOpacity(
-                      opacity: fullyCollapsed ? 1 : 0,
-                      duration: const Duration(milliseconds: 100),
-                      child: widget.title,
-                    ),
-              collapsedHeight: appBarHeight,
-              expandedHeight:
-                  fullyExpanded ? fullyExpandedHeight : expandedHeight,
-              flexibleSpace: Stack(
-                children: [
-                  FlexibleSpaceBar(
-                    background: Container(
-                      margin: const EdgeInsets.only(bottom: 0.2),
-                      child: fullyExpanded
-                          ? (widget.expandedBody ?? const SizedBox())
-                          : widget.headerWidget,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -1,
-                    left: 0,
-                    right: 0,
-                    child: roundedCorner(context),
-                  ),
-                  Positioned(
-                    bottom: 0 + widget.curvedBodyRadius,
-                    child: AnimatedContainer(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      curve: Curves.easeInOutCirc,
-                      duration: const Duration(milliseconds: 100),
-                      height: fullyCollapsed
-                          ? 0
-                          : fullyExpanded
-                              ? 0
-                              : kToolbarHeight,
-                      width: MediaQuery.of(context).size.width,
-                      child: fullyCollapsed
-                          ? const SizedBox()
-                          : fullyExpanded
-                              ? const SizedBox()
-                              : widget.headerBottomBar ?? Container(),
-                    ),
-                  )
-                ],
-              ),
-              stretchTriggerOffset: widget.stretchTriggerOffset,
-              onStretchTrigger: widget.fullyStretchable
-                  ? () async {
-                      if (!fullyExpanded) isFullyExpanded.add(true);
-                    }
-                  : null,
-            );
-          },
-        ),
+        // StreamBuilder<List<bool>>(
+        //   stream: CombineLatestStream.list<bool>([
+        //     isFullyCollapsed.stream,
+        //     isFullyExpanded.stream,
+        //   ]),
+        //   builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
+        //     final List<bool> streams = (snapshot.data ?? [false, false]);
+        //     final bool fullyCollapsed = streams[0];
+        //     final bool fullyExpanded = streams[1];
+        //
+        //     return SliverAppBar(
+        //       backgroundColor:
+        //           !fullyCollapsed ? widget.backgroundColor : widget.appBarColor,
+        //       leading: widget.alwaysShowLeadingAndAction
+        //           ? widget.leading
+        //           : !fullyCollapsed
+        //               ? const SizedBox()
+        //               : widget.leading,
+        //       actions: widget.alwaysShowLeadingAndAction
+        //           ? widget.actions
+        //           : !fullyCollapsed
+        //               ? []
+        //               : widget.actions,
+        //       elevation: 0,
+        //       pinned: true,
+        //       stretch: true,
+        //       centerTitle: widget.centerTitle,
+        //       title: widget.alwaysShowTitle
+        //           ? widget.title
+        //           : AnimatedOpacity(
+        //               opacity: fullyCollapsed ? 1 : 0,
+        //               duration: const Duration(milliseconds: 100),
+        //               child: widget.title,
+        //             ),
+        //       collapsedHeight: appBarHeight,
+        //       expandedHeight:
+        //           fullyExpanded ? fullyExpandedHeight : expandedHeight,
+        //       flexibleSpace: Stack(
+        //         children: [
+        //           FlexibleSpaceBar(
+        //             background: Container(
+        //               margin: const EdgeInsets.only(bottom: 0.2),
+        //               child: fullyExpanded
+        //                   ? (widget.expandedBody ?? const SizedBox())
+        //                   : widget.headerWidget,
+        //             ),
+        //           ),
+        //           Positioned(
+        //             bottom: -1,
+        //             left: 0,
+        //             right: 0,
+        //             child: roundedCorner(context),
+        //           ),
+        //           Positioned(
+        //             bottom: 0 + widget.curvedBodyRadius,
+        //             child: AnimatedContainer(
+        //               padding: const EdgeInsets.only(left: 10, right: 10),
+        //               curve: Curves.easeInOutCirc,
+        //               duration: const Duration(milliseconds: 100),
+        //               height: fullyCollapsed
+        //                   ? 0
+        //                   : fullyExpanded
+        //                       ? 0
+        //                       : kToolbarHeight,
+        //               width: MediaQuery.of(context).size.width,
+        //               child: fullyCollapsed
+        //                   ? const SizedBox()
+        //                   : fullyExpanded
+        //                       ? const SizedBox()
+        //                       : widget.headerBottomBar ?? Container(),
+        //             ),
+        //           )
+        //         ],
+        //       ),
+        //       stretchTriggerOffset: widget.stretchTriggerOffset,
+        //       onStretchTrigger: widget.fullyStretchable
+        //           ? () async {
+        //               if (!fullyExpanded) isFullyExpanded.add(true);
+        //             }
+        //           : null,
+        //     );
+        //   },
+        // ),
         sliverList(context, appBarHeight + topPadding),
       ],
     );
